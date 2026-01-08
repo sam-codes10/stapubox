@@ -32,7 +32,7 @@ public class Auth {
                 .compact();
     }
 
-    public JwtClaims validateToken(String token) throws JwtException {
+    public JwtClaims parseToken(String token) throws JwtException {
         Jws<Claims> jwsClaims = Jwts.parserBuilder()
                 .setSigningKey(getSigningKey())
                 .build()
@@ -46,4 +46,5 @@ public class Auth {
                 body.getIssuedAt(),
                 body.getExpiration());
     }
+
 }
