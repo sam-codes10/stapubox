@@ -7,9 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SignupPayload {
-    private String email;
-    private String password;
-    private String fullName;
-    private String role;
+public class VenuePayload {
+    private String venueName;
+    private String venueLocation;
+    private Long sportId;
+    private Long slotStartTime;
+    private Long slotEndTime;
 }

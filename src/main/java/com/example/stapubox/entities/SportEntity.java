@@ -25,7 +25,7 @@ public class SportEntity {
     @Column(name = "sport_name", nullable = false)
     private String sportName;
 
-    @Column(name = "sport_code")
+    @Column(name = "sport_code", unique = true, nullable = false)
     private String sportCode;
 
 }
