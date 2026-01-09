@@ -81,7 +81,7 @@ public class VenueService {
     }
 
     public void softdeleteVenue(Long venueId) {
-        int rowsAffected = venueRepository.deleteByVenueId(venueId);
+        int rowsAffected = venueRepository.softDeleteByVenueId(venueId);
         if (rowsAffected == 0) {
             throw new RuntimeException("Venue with ID " + venueId + " not found.");
         }
