@@ -33,7 +33,7 @@ public class VenueController {
     @PostMapping("/add/admin")
     public ResponseEntity<?> addVenue(@RequestBody VenuePayload venuePayload,
             @RequestHeader("Authorization") String token) {
-        // Remove Bearer prefix if present
+
         if (token.startsWith("Bearer ")) {
             token = token.substring(7);
         }

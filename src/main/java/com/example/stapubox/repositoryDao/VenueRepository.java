@@ -29,6 +29,5 @@ public interface VenueRepository extends JpaRepository<VenueEntity, Long> {
     @Modifying
     @Transactional
     @Query("UPDATE VenueEntity v SET v.deleted = true WHERE v.venueId = ?1")
-    int deleteByVenueId(Long venueId);
-
+    int softDeleteByVenueId(Long venueId);
 }

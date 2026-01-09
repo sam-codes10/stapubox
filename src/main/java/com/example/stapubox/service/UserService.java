@@ -17,7 +17,7 @@ import com.example.stapubox.repositoryDao.UserRepository;
 
 @Service
 public class UserService {
-    private UserRepository userRepo;
+    private final UserRepository userRepo;
     private final PasswordEncoder passwordEncoder;
     private final Auth auth;
 
