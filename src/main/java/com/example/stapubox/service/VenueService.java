@@ -1,6 +1,7 @@
 package com.example.stapubox.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -11,14 +12,17 @@ import com.example.stapubox.entities.VenueEntity;
 import com.example.stapubox.models.payloads.VenuePayload;
 import com.example.stapubox.models.response.AddVenueResponse;
 import com.example.stapubox.models.response.AllVenuesResponse;
+import com.example.stapubox.repositoryDao.SportRepository;
 import com.example.stapubox.repositoryDao.VenueRepository;
 
 @Service
 public class VenueService {
     private final VenueRepository venueRepository;
+    private final SportRepository sportRepository;
 
-    public VenueService(VenueRepository venueRepository) {
+    public VenueService(VenueRepository venueRepository, SportRepository sportRepository) {
         this.venueRepository = venueRepository;
+        this.sportRepository = sportRepository;
     }
 
     @Transactional
@@ -26,6 +30,13 @@ public class VenueService {
         AddVenueResponse addVenueResponse = new AddVenueResponse();
         VenueEntity venueEntity = new VenueEntity();
         try {
+           boolean exists = sportRepository.existsBySportId(payload.getSportId());
+
+           if (!exists) {
+            System.err.println("No sport id found "+ payload.getSportId());
+            throw new Exception("No sport id found");
+           }
+              
             BeanUtils.copyProperties(payload, venueEntity);
             Long cnt = venueRepository.findExistingVenueId(payload.getVenueName(), payload.getVenueLocation());
             if (cnt != null && cnt > 0) {
